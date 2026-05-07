@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="Woo Dev Template">
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+    <file>woo-dev-template.php</file>
+    <file>src</file>
+    <rule ref="PSR12"/>
+    <rule ref="WordPress.Security"/>
+    <rule ref="WordPress.WP.I18n"/>
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array">
+                <element value="woo_dev_template"/>
+                <element value="WOO_DEV_TEMPLATE"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>

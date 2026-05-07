@@ -1,0 +1,11 @@
+.git
+.env
+uploads
+wordpress
+wp-content
+plugins/woo-dev-template/vendor
+coverage
+.phpunit.cache
+.phpstan.cache
+.DS_Store
+

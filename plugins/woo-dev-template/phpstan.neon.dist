@@ -1,0 +1,13 @@
+parameters:
+  level: 5
+  paths:
+    - src
+    - woo-dev-template.php
+  bootstrapFiles:
+    - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+    - tests/stubs/phpstan-woocommerce.php
+  universalObjectCratesClasses:
+    - WP_Post
+    - WP_User
+  ignoreErrors:
+    - '#Function (add_action|add_filter|register_activation_hook|register_deactivation_hook|plugin_dir_path|plugin_dir_url|esc_html__|current_user_can|is_admin|wp_parse_args|wp_insert_user|wp_update_post|get_option|update_option|wp_set_object_terms|get_term_by|wp_insert_term|wp_send_json_success|wp_send_json_error|wp_verify_nonce|sanitize_text_field|wp_unslash|add_query_arg|admin_url|wp_safe_redirect|wp_die|wp_create_nonce|checked|submit_button|settings_fields|do_settings_sections|register_setting|add_options_page|wp_next_scheduled|wp_schedule_event|wp_clear_scheduled_hook|is_wp_error|delete_post_meta|get_posts|get_users|get_term_meta|update_post_meta|update_term_meta|get_post_meta|delete_option) not found#'

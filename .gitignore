@@ -1,0 +1,12 @@
+.env
+.phpunit.result.cache
+.phpunit.cache/
+.phpstan.cache/
+coverage/
+vendor/
+plugins/woo-dev-template/vendor/
+wordpress/
+wp-content/
+uploads/
+.DS_Store
+
