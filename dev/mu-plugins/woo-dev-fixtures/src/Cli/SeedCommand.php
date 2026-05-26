@@ -2,14 +2,15 @@
 /**
  * WP-CLI seed command registration.
  *
- * @package WooDevTemplate\Cli
+ * @package WooDevFixtures\Cli
  */
 
 declare(strict_types=1);
 
-namespace WooDevTemplate\Cli;
+namespace WooDevFixtures\Cli;
 
-use WooDevTemplate\Seed\StoreSeeder;
+use InvalidArgumentException;
+use WooDevFixtures\Seed\StoreSeeder;
 
 /**
  * Registers `wp woo-dev seed`.
@@ -55,29 +56,17 @@ final class SeedCommand
             \WP_CLI::error('WooCommerce must be active before seeding.');
         }
 
-        $profile = isset($assoc_args['profile']) ? sanitize_key((string) $assoc_args['profile']) : 'rich';
-
-        if (! in_array($profile, ['small', 'rich', 'performance'], true)) {
-            \WP_CLI::error('Profile must be one of: small, rich, performance.');
+        try {
+            $options = SeedOptions::from_assoc_args($assoc_args);
+        } catch (InvalidArgumentException $exception) {
+            \WP_CLI::error($exception->getMessage());
         }
 
-        $reset = isset($assoc_args['reset']);
-
-        if ($reset && ! isset($assoc_args['yes'])) {
-            \WP_CLI::confirm('Delete all records previously created by the Woo Dev Template seeder?');
+        if ($options['reset'] && ! isset($assoc_args['yes'])) {
+            \WP_CLI::confirm('Delete all records previously created by the Woo Dev fixture seeder?');
         }
 
-        $products = isset($assoc_args['products']) ? max(1, absint($assoc_args['products'])) : 250;
-        $orders   = isset($assoc_args['orders']) ? max(1, absint($assoc_args['orders'])) : 500;
-
-        $summary = (new StoreSeeder())->seed(
-            [
-                'profile'  => $profile,
-                'reset'    => $reset,
-                'products' => $products,
-                'orders'   => $orders,
-            ]
-        );
+        $summary = (new StoreSeeder())->seed($options);
 
         \WP_CLI::success(
             sprintf(
@@ -91,4 +80,3 @@ final class SeedCommand
         );
     }
 }
-

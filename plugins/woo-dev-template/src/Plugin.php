@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace WooDevTemplate;
 
 use WooDevTemplate\Admin\SettingsPage;
-use WooDevTemplate\Cli\SeedCommand;
 use WooDevTemplate\WooCommerce\OrderNotes;
 
 /**
@@ -69,9 +68,6 @@ final class Plugin
             (new OrderNotes())->register();
         }
 
-        if (defined('WP_CLI') && WP_CLI) {
-            SeedCommand::register();
-        }
     }
 
     /**
@@ -82,4 +78,3 @@ final class Plugin
         return class_exists('WooCommerce') && function_exists('wc_get_product');
     }
 }
-

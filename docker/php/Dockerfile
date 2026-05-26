@@ -1,5 +1,6 @@
 ARG WORDPRESS_VERSION=6.9.4
-FROM wordpress:${WORDPRESS_VERSION}-php8.3-apache
+ARG PHP_VERSION=8.3
+FROM wordpress:${WORDPRESS_VERSION}-php${PHP_VERSION}-apache
 
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
